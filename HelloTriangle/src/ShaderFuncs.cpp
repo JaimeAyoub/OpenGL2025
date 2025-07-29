@@ -42,7 +42,7 @@ GLuint CreateShader(GLenum eShaderType, const std::string &strShaderFile)
 
 GLuint CreateProgram(const std::vector<GLuint> &shaderList)
 {
-	GLuint program = glCreateProgram(); //Solo te regresa el ID
+	GLuint program = glCreateProgram();
 
 	for(size_t iLoop = 0; iLoop < shaderList.size(); iLoop++)
 		glAttachShader(program, shaderList[iLoop]);
@@ -51,7 +51,7 @@ GLuint CreateProgram(const std::vector<GLuint> &shaderList)
 
 	GLint status;
 	glGetProgramiv (program, GL_LINK_STATUS, &status);
-	if (status == GL_FALSE) //Esto es por si falla.
+	if (status == GL_FALSE)
 	{
 		GLint infoLogLength;
 		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &infoLogLength);

@@ -6,61 +6,57 @@
 Application application;
 
 
-void checkKeyboard(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-    {
-        //Activar el flag de salida del programa.
 
-        glfwSetWindowShouldClose(window, 1);
-    }
-}
+
 
 int main(void)
 {
-    GLFWwindow* window;
+
 
     /* Initialize the library */
     if (!glfwInit())
         return -1;
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(1080, 720, "Hello Triangle", NULL, NULL);
-    if (!window)
+    application.window = glfwCreateWindow(1280, 960, "Hello Triangle", NULL, NULL);
+    if (!application.window)
     {
         glfwTerminate();
         return -1;
     }
-
-    glfwMakeContextCurrent(window);
-
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout << "Error al iniciar GLAD" << std::endl;
+    glfwMakeContextCurrent(application.window);
+    
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        std::cout << "Error al inicializar GLAD" << std::endl;
         return -1;
     }
-    application.Setup();
-    /* Make the window's context current */
 
-    glfwSetKeyCallback(window, checkKeyboard);
+    /* Make the window's context current */
+   // glfwSetKeyCallback(application.window, application.Keyboard);
+  
+
+    application.Setup();
 
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(application.window))
     {
+        double currentTime = glfwGetTime();
+        
+        
+
         /* Poll for and process events */
         glfwPollEvents();
+        application.Update();
+        application.Keyboard2();
+
+        //application.Keyboard(window, GLFW_KEY_U,GLFW_PRESS);
         /* Render here */
-        application.Draw();
         glClear(GL_COLOR_BUFFER_BIT);
-        //application.Update();
         application.Draw();
 
-
-
-       
-
+        
         /* Swap front and back buffers */
-        //glfwSwapBuffers(window);
+        glfwSwapBuffers(application.window);
     }
 
     glfwTerminate();
