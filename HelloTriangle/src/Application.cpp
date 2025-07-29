@@ -124,9 +124,8 @@ void Application::Update()
 	glfwGetCursorPos(this->window, &posxMouse, &posyMouse);
 	posX = static_cast<float>(posxMouse);
 	posY = static_cast<float>(posyMouse);
+
 	//std::cout << posX << std::endl;
-
-
 	//std::cout << posX/5120 << std::endl;
 	
 }
@@ -152,6 +151,9 @@ void Application::Draw()
 
 void Application::Keyboard(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+	//NOTA
+	//Esta funcion esta sin utilizar hasta que descubra como poder pasarla a 
+	// glfwSetKeyCallback(application.window, application.Keyboard);
 	window = this->window;
 	if (key == GLFW_KEY_X && action == GLFW_PRESS)
 	{
@@ -170,15 +172,29 @@ void Application::Keyboard(GLFWwindow* window, int key, int scancode, int action
 
 void Application::Keyboard2()
 {
-	if (glfwGetKey(this->window, GLFW_KEY_X) == GLFW_PRESS)
+	//Esta funcion de obtener la tecla que se esta presionando la use en el proyecto del anterior trimestre
+	//Debido a que no supe como usar la otra funcion, use esta, aunque se que no es lo que pidio profe
+	// 
+	//Use las teclas A,S,D para referirme al R,G,B.
+	// Por lo tanto si presiona A y mueve la posicion del mouse hacia la derecha
+	// la tonalidad del rojo aumentara, y si lo mueve para la izquierda disminuira
+	// solo se basa en la posicion del mouse en X, por lo que si lo mueve hacia arriba o abajo no cambiara.
+	// 
+	// Esto aplica igual para las demas teclas S y D.
+	// posX se divide en 5120 ya que es mi resolucion x4, esto para que sea mas notorio el cambio y no de golpe.
+	// 
+	//
+
+
+	if (glfwGetKey(this->window, GLFW_KEY_A) == GLFW_PRESS) 
 	{
 		outColorRed = glm::vec4(posX / 5120, 0.0f, 0.0f, 1.0f);
 	}
-	else if (glfwGetKey(this->window, GLFW_KEY_Y) == GLFW_PRESS)
+	else if (glfwGetKey(this->window, GLFW_KEY_S) == GLFW_PRESS)
 	{
 		outColorGreen = glm::vec4(0.0f, posX / 5120, 0.0f, 1.0f);
 	}
-	else if (glfwGetKey(this->window, GLFW_KEY_Z) == GLFW_PRESS)
+	else if (glfwGetKey(this->window, GLFW_KEY_D) == GLFW_PRESS)
 	{
 		outColorBlue = glm::vec4(0.0f, 0.0f, posX / 5120, 1.0f);
 	}
@@ -187,6 +203,5 @@ void Application::Keyboard2()
 	{
 		//activar el flag de salida del probgrama
 		glfwSetWindowShouldClose(window, 1);
-
 	}
 }
