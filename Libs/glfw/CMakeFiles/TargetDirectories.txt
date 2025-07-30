@@ -1,0 +1,4 @@
+C:/Users/ALUMNOS/Desktop/OpenGL/Libs/glfw/CMakeFiles/ALL_BUILD.dir
+C:/Users/ALUMNOS/Desktop/OpenGL/Libs/glfw/CMakeFiles/ZERO_CHECK.dir
+C:/Users/ALUMNOS/Desktop/OpenGL/Libs/glfw/src/CMakeFiles/glfw.dir
+C:/Users/ALUMNOS/Desktop/OpenGL/Libs/glfw/src/CMakeFiles/update_mappings.dir
