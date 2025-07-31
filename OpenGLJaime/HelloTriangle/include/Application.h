@@ -12,6 +12,7 @@ private:
 	std::map<std::string, GLuint> geometry;
 	std::map<std::string, GLuint> uniforms;
 
+	glm::mat4 projection;
 	glm::mat4 camera;
 	glm::vec3 eye;
 	glm::vec3 center;
@@ -34,7 +35,7 @@ private:
 	float posY{ 0.0f };
 	GLuint posxID;
 	GLuint posyID;
-	//Para elegir el vertice
+	//Valores para cambiar los colores
 	glm::vec4 outColorRed;
 	glm::vec4 outColorGreen;
 	glm::vec4 outColorBlue;

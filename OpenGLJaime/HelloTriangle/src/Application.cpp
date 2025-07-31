@@ -29,6 +29,7 @@ void Application::SetupShaderTransform()
 	//Crear programa
 	shaders["transforms"] = InitializeProgram(vertexShader, fragmentShader);
 	uniforms["camera"] = glGetUniformLocation(shaders["transforms"], "camera");
+	uniforms["projection"] = glGetUniformLocation(shaders["transforms"], "projection");
 }
 
 void Application::SetupShaders()
@@ -148,7 +149,9 @@ void Application::Setup()
 
 	//Inicializar camara
 	eye = glm::vec3(0.0f, 0.0f, 2.0f);
-	center = glm::vec3(0.0f, 0.0f, 1.0f);
+
+	center = glm::vec3(0.0f, 0.0f, -1.0f);
+	projection = glm::perspective(glm::radians(45.0f), (1280.0f / 960.0f), 0.1f, 10.0f);
 
 		
 }
@@ -156,11 +159,11 @@ void Application::Setup()
 void Application::Update()
 {
 
-	time += 0.005;
+	time += 0.00005;
 	//Actualizar ojo
-
+	eye = glm::vec3(0.0f, 0.0f, 2.5f );
 	//Actualizar center
-
+	center = glm::vec3(cos(time), 0.0f, 1.0f);
 	//Actualizar camara
 	camera = glm::lookAt(eye, center, glm::vec3(0.0f, 1.0f, 0.0f));
 }
@@ -177,13 +180,14 @@ void Application::Draw()
 	glUniform4f(selectColorIDGreen, outColorGreen.x, outColorGreen.y, outColorGreen.z, outColorGreen.w);
 	glUniform4f(selectColorIDBlue, outColorBlue.x, outColorBlue.y, outColorBlue.z, outColorBlue.w);
 	glUniformMatrix4fv(uniforms["camera"], 1, GL_FALSE, glm::value_ptr(camera));
+	glUniformMatrix4fv(uniforms["projection"], 1, GL_FALSE, glm::value_ptr(projection));
 
 	//Seleccionar la geometria (el triangulo)
 	glBindVertexArray(geometry["triangulo"]);
 
 	//glDraw()
 	//glDrawArrays(GL_TRIANGLES, 0, 6);
-	glDrawArrays(GL_TRIANGLES, 0, 4);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
 void Application::Keyboard(int key, int scancode, int action, int mods)
