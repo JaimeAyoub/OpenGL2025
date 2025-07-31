@@ -1,7 +1,8 @@
 #pragma once
 #include "glad.h"
 #include "GLFW/glfw3.h"
-#include "glm.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 #include <string>
 #include <map>
 class Application
@@ -9,7 +10,16 @@ class Application
 private:
 	std::map<std::string, GLuint> shaders;
 	std::map<std::string, GLuint> geometry;
+	std::map<std::string, GLuint> uniforms;
+
+	glm::mat4 camera;
+	glm::vec3 eye;
+	glm::vec3 center;
+
+
 	void SetupShaders();
+	void SetupShaderPassthru();
+	void SetupShaderTransform();
 	void SetupGeometry();
 	void SetupGeometrySingleArray();
 
@@ -37,10 +47,12 @@ private:
 
 public:
 	GLFWwindow* window; 
+
 	void Setup();
 	void Update();
 	void Draw();
-	void Keyboard(GLFWwindow* window, int key, int scancode, int action, int mods);
+	void Keyboard(int key, int scancode, int action, int mods);
 	void Keyboard2();
+	void MousePosition();
 	
 };

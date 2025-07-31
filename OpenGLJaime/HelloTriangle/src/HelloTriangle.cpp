@@ -5,6 +5,10 @@
 
 Application application;
 
+    void checkKeyboard(GLFWwindow* window,int key, int scancode, int action, int mods)
+    {
+        application.Keyboard(key, scancode, action, mods);
+    }
 
 int main(void)
 {
@@ -24,12 +28,13 @@ int main(void)
     glfwMakeContextCurrent(application.window);
     
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+
         std::cout << "Error al inicializar GLAD" << std::endl;
         return -1;
     }
 
     /* Make the window's context current */
-   // glfwSetKeyCallback(application.window, application.Keyboard);
+    glfwSetKeyCallback(application.window, checkKeyboard);
   
 
     application.Setup();
@@ -42,7 +47,8 @@ int main(void)
         /* Poll for and process events */
         glfwPollEvents();
         application.Update();
-        application.Keyboard2();
+        //application.Keyboard2();
+        application.MousePosition();
 
         //application.Keyboard(window, GLFW_KEY_U,GLFW_PRESS);
         /* Render here */

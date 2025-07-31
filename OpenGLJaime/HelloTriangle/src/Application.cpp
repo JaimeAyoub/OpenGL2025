@@ -2,8 +2,10 @@
 #include "ShaderFuncs.h"
 #include <iostream>
 #include <vector>
+#include "glm/gtc/type_ptr.hpp"
 
-void Application::SetupShaders()
+
+void Application::SetupShaderPassthru()
 {
 	//cargar shaders
 	std::string vertexShader{ loadTextFile("Shaders/vertexPassthru.glsl") };
@@ -18,7 +20,21 @@ void Application::SetupShaders()
 	selectColorIDRed = glGetUniformLocation(shaders["passthru"], "outColorRed");
 	selectColorIDGreen = glGetUniformLocation(shaders["passthru"], "outColorGreen");
 	selectColorIDBlue = glGetUniformLocation(shaders["passthru"], "outColorBlue");
+}
+void Application::SetupShaderTransform()
+{
+	//Cargar shaders
+	std::string vertexShader{ loadTextFile("Shaders/vertexTrans.glsl") };
+	std::string fragmentShader{ loadTextFile("Shaders/fragmentTrans.glsl") };
+	//Crear programa
+	shaders["transforms"] = InitializeProgram(vertexShader, fragmentShader);
+	uniforms["camera"] = glGetUniformLocation(shaders["transforms"], "camera");
+}
 
+void Application::SetupShaders()
+{
+	//SetupShaderPassthru();
+	SetupShaderTransform();
 }
 
 void Application::SetupGeometry()
@@ -26,15 +42,23 @@ void Application::SetupGeometry()
 	std::vector<GLfloat> triangle
 	{
 		-1.0f, 1.0f, -1.0f, 1.0f, // vertice 0
+		1.0f, 1.0f, -1.0f, 1.0f, // vertice 3
 		-1.0f, -1.0f, -1.0f, 1.0f,// vertice 1
 		1.0f, -1.0f, -1.0f, 1.0f, // vertice 2
+
+		//-1.0f, 1.0f, -1.0f, 1.0f, // vertice 0
+		//1.0f, -1.0f, -1.0f, 1.0f,// vertice 2
 	};
 
 	std::vector<GLfloat> colors
 	{
 		1.0f, 0.0f, 0.0f, 1.0f, // RED
-		0.0f, 0.15f, 0.0f, 1.0f, // GREEN
-		0.0f, 0.0f, 0.30f, 1.0f, // BLUE
+		0.0f, 1.0f, 0.0f, 1.0f, // GREEN
+		1.0f,1.0f, 1.0f, 1.0f, // White
+		0.0f, 0.0f, 1.0f, 1.0f, // BLUE
+
+		//1.0f, 0.0f, 0.0f, 1.0f, // RED
+		//0.0f, 0.0f, 1.0f, 1.0f, // Blue
 	};
 
 	//Crear VAO
@@ -74,12 +98,18 @@ void Application::SetupGeometrySingleArray()
 	std::vector<GLfloat> triangle
 	{
 		-1.0f, 1.0f, -1.0f, 1.0f, // vertice 0
-		-1.0f, -1.0f, -1.0f, 1.0f,// vertice 1
-		1.0f, -1.0f, -1.0f, 1.0f, // vertice 2
-
 		1.0f, 0.0f, 0.0f, 1.0f, // RED
-		0.0f, 0.15f, 0.0f, 1.0f, // GREEN
-		0.0f, 0.0f, 0.30f, 1.0f, // BLUE
+		1.0f, -1.0f, -1.0f, 1.0f, // vertice 2
+		0.0f, 1.0f, 0.0f, 1.0f, // GREEN
+		-1.0f, -1.0f, -1.0f, 1.0f,// vertice 1
+		0.0f, 0.0f, 1.0f, 1.0f, // BLUE
+		1.0f, 1.0f, -1.0f, 1.0f, // vertice 3
+		1.0f, 1.0f, 1.0f, 1.0f, // White
+
+		//-1.0f, 1.0f, -1.0f, 1.0f, // vertice 3
+		//-1.0f, -1.0f, -1.0f, 1.0f,// vertice 4
+		//1.0f, 0.0f, 0.0f, 1.0f, // RED
+		//0.0f, 0.15f, 0.0f, 1.0f, // GREEN
 
 	};
 
@@ -99,11 +129,11 @@ void Application::SetupGeometrySingleArray()
 		sizeof(GLfloat) * triangle.size(),
 		&triangle[0],
 		GL_STATIC_DRAW);  //Mandamos la geometria al buffer
-
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (void*)&triangle[0]); //geometria
+	const GLint stride = 8 * sizeof(GLfloat);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, stride, (GLvoid*)0); //geometria
 	glEnableVertexAttribArray(0);
 
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, (void*)&triangle[12]); //colores
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, stride, (GLvoid*)(4*sizeof(GLfloat))); //colores
 	glEnableVertexAttribArray(1);
 }
 
@@ -112,28 +142,33 @@ void Application::Setup()
 
 
 	SetupShaders();
-	SetupGeometry();
+	//SetupGeometry();
 
-	//SetupGeometrySingleArray();
+	SetupGeometrySingleArray();
+
+	//Inicializar camara
+	eye = glm::vec3(0.0f, 0.0f, 2.0f);
+	center = glm::vec3(0.0f, 0.0f, 1.0f);
+
+		
 }
 
 void Application::Update()
 {
 
 	time += 0.005;
-	glfwGetCursorPos(this->window, &posxMouse, &posyMouse);
-	posX = static_cast<float>(posxMouse);
-	posY = static_cast<float>(posyMouse);
+	//Actualizar ojo
 
-	//std::cout << posX << std::endl;
-	//std::cout << posX/5120 << std::endl;
-	
+	//Actualizar center
+
+	//Actualizar camara
+	camera = glm::lookAt(eye, center, glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
 void Application::Draw()
 {
 	//Seleccionar programa (shaders)
-	glUseProgram(shaders["passthru"]);
+	glUseProgram(shaders["transforms"]);
 	//Pasar el resto de los parámetros para el programa
 	glUniform1f(timeID, time);
 	glUniform1f(posxID, posX);
@@ -141,31 +176,35 @@ void Application::Draw()
 	glUniform4f(selectColorIDRed, outColorRed.x, outColorRed.y, outColorRed.z, outColorRed.w);
 	glUniform4f(selectColorIDGreen, outColorGreen.x, outColorGreen.y, outColorGreen.z, outColorGreen.w);
 	glUniform4f(selectColorIDBlue, outColorBlue.x, outColorBlue.y, outColorBlue.z, outColorBlue.w);
+	glUniformMatrix4fv(uniforms["camera"], 1, GL_FALSE, glm::value_ptr(camera));
 
 	//Seleccionar la geometria (el triangulo)
 	glBindVertexArray(geometry["triangulo"]);
 
 	//glDraw()
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	//glDrawArrays(GL_TRIANGLES, 0, 6);
+	glDrawArrays(GL_TRIANGLES, 0, 4);
 }
 
-void Application::Keyboard(GLFWwindow* window, int key, int scancode, int action, int mods)
+void Application::Keyboard(int key, int scancode, int action, int mods)
 {
-	//NOTA
-	//Esta funcion esta sin utilizar hasta que descubra como poder pasarla a 
-	//glfwSetKeyCallback(application.window, application.Keyboard);
 	window = this->window;
-	if (key == GLFW_KEY_X && action == GLFW_PRESS)
+
+	if (key == GLFW_KEY_A && action == GLFW_REPEAT)
 	{
-		outColorRed = glm::vec4(posX / 5120, 0.0f, 0.0f, 1.0f);
+		outColorRed = glm::vec4(posX/1280, 0.0f, 0.0f, 1.0f);
 	}
-	else if (key == GLFW_KEY_Y && action == GLFW_PRESS)
+	else if (key == GLFW_KEY_S && action == GLFW_REPEAT)
 	{
-		outColorGreen = glm::vec4(0.0f, posX / 5120, 0.0f, 1.0f);
+		outColorGreen = glm::vec4(0.0f, posX/1280 , 0.0f, 1.0f);
 	}
-	else if (key == GLFW_KEY_Z && action == GLFW_PRESS)
+	else if (key == GLFW_KEY_D && action == GLFW_REPEAT)
 	{
-		outColorBlue = glm::vec4(0.0f, 0.0f, posX / 5120, 1.0f);
+		outColorBlue = glm::vec4(0.0f, 0.0f, posX/1280, 1.0f);
+	}
+	else if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+	{
+		glfwSetWindowShouldClose(window, 1);
 	}
 
 }
@@ -187,15 +226,15 @@ void Application::Keyboard2()
 
 	if (glfwGetKey(this->window, GLFW_KEY_A) == GLFW_PRESS) 
 	{
-		outColorRed = glm::vec4(posX / 5120, 0.0f, 0.0f, 1.0f);
+		outColorRed = glm::vec4(posX / 1280, 0.0f, 0.0f, 1.0f);
 	}
 	else if (glfwGetKey(this->window, GLFW_KEY_S) == GLFW_PRESS)
 	{
-		outColorGreen = glm::vec4(0.0f, posX / 5120, 0.0f, 1.0f);
+		outColorGreen = glm::vec4(0.0f, posX / 1280, 0.0f, 1.0f);
 	}
 	else if (glfwGetKey(this->window, GLFW_KEY_D) == GLFW_PRESS)
 	{
-		outColorBlue = glm::vec4(0.0f, 0.0f, posX / 5120, 1.0f);
+		outColorBlue = glm::vec4(0.0f, 0.0f, posX / 1280, 1.0f);
 	}
 
 	if (glfwGetKey(this->window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -203,4 +242,11 @@ void Application::Keyboard2()
 		//activar el flag de salida del probgrama
 		glfwSetWindowShouldClose(window, 1);
 	}
+}
+
+void Application::MousePosition()
+{
+	glfwGetCursorPos(this->window, &posxMouse, &posyMouse);
+	posX = static_cast<float>(posxMouse);
+	posY = static_cast<float>(posyMouse);
 }

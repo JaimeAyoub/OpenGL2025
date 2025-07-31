@@ -1,5 +1,3 @@
 ﻿  Application.cpp
-C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGL\OpenGLJaime\HelloTriangle\src\Application.cpp(123,10): warning C4305: '+=': truncation from 'double' to 'float'
-  HelloTriangle.cpp
-  Generating Code...
-  HelloTriangle.vcxproj -> C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGL\OpenGLJaime\x64\Debug\HelloTriangle.exe
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\HelloTriangle\src\Application.cpp(159,15): warning C4305: '+=': truncation from 'double' to 'float'
+  HelloTriangle.vcxproj -> C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\x64\Debug\HelloTriangle.exe
