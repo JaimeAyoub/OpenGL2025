@@ -19,13 +19,14 @@ int main(void)
         return -1;
 
     /* Create a windowed mode window and its OpenGL context */
-    application.window = glfwCreateWindow(1280, 960, "Hello Triangle", NULL, NULL);
+    application.window = glfwCreateWindow(application.screen_width,application.screen_height, "Hello Triangle", NULL, NULL);
     if (!application.window)
     {
         glfwTerminate();
         return -1;
     }
     glfwMakeContextCurrent(application.window);
+    glfwSetInputMode(application.window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 

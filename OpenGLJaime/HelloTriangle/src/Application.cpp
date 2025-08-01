@@ -159,17 +159,18 @@ void Application::Setup()
 void Application::Update()
 {
 
-	time += 0.00005;
+	//time += 0.005;
 	//Actualizar ojo
 	eye = glm::vec3(0.0f, 0.0f, 2.5f );
 	//Actualizar center
-	center = glm::vec3(cos(time), 0.0f, 1.0f);
+	center = glm::vec3(posX/screen_width , posY/screen_height* -1, 1.0f);
 	//Actualizar camara
 	camera = glm::lookAt(eye, center, glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
 void Application::Draw()
 {
+
 	//Seleccionar programa (shaders)
 	glUseProgram(shaders["transforms"]);
 	//Pasar el resto de los parámetros para el programa

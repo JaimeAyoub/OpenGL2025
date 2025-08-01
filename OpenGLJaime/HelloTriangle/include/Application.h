@@ -56,4 +56,6 @@ public:
 	void Keyboard2();
 	void MousePosition();
 	
+	float screen_width = 1280;
+	float screen_height = 960;
 };
