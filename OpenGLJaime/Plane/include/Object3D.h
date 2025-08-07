@@ -12,7 +12,7 @@ class Object3D
 {
 public:
 	GLuint	vao, //Vertex Array Object
-			pbo; //position buffer object
+			vbo; //vertex buffer object
 
 	int numVertex; //numero de vertices para este objeto
 	glm::vec3 angles;

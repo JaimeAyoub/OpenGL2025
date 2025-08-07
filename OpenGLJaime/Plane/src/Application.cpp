@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "ShaderFuncs.h"
+#include "Plane.h"
 #include <iostream>
 #include <vector>
 #include "glm/gtc/type_ptr.hpp"
@@ -30,6 +31,14 @@ void Application::SetupShaderTransform()
 	shaders["transforms"] = InitializeProgram(vertexShader, fragmentShader);
 	uniforms["camera"] = glGetUniformLocation(shaders["transforms"], "camera");
 	uniforms["projection"] = glGetUniformLocation(shaders["transforms"], "projection");
+	uniforms["acumTrans"] = glGetUniformLocation(shaders["uniforms"], "acummTrans");
+	uniforms["outColorRed"] = glGetUniformLocation(shaders["transforms"], "outColorRed");
+	uniforms["outColorGreen"] = glGetUniformLocation(shaders["transforms"], "outColorGreen");
+	uniforms["outColorBlue"] = glGetUniformLocation(shaders["transforms"], "outColorBlue");
+	uniforms["time"] = glGetUniformLocation(shaders["transforms"], "time");
+	uniforms["frecuency"] = glGetUniformLocation(shaders["transforms"], "frecuency");
+	uniforms["amplitude"] = glGetUniformLocation(shaders["transforms"], "amplitude");
+
 }
 
 void Application::SetupShaders()
@@ -139,35 +148,49 @@ void Application::SetupGeometrySingleArray()
 	glEnableVertexAttribArray(1);
 }
 
+void Application::SetupPlane()
+{
+	plane.createPlane(50);
+}
 void Application::Setup()
 {
 
 
 	SetupShaders();
-	SetupGeometry();
+	SetupPlane();
+	//SetupGeometry();
 
 	//SetupGeometrySingleArray();
 
 	//Inicializar camara
-	eye = glm::vec3(0.0f, 0.0f, 2.0f);
+	eye = glm::vec3(0.0f, 0.0f, 5.0f);
 
 	center = glm::vec3(0.0f, 0.0f, -1.0f);
-	projection = glm::perspective(glm::radians(45.0f), (1280.0f / 960.0f), 0.1f, 10.0f);
+	projection = glm::perspective(glm::radians(45.0f), (1280.0f / 960.0f), 0.1f, 200.0f);
+	accumTrans = glm::rotate(glm::mat4(1.0f), glm::radians(45.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
+	glPolygonMode( GL_FRONT, GL_LINE);
+	glPolygonMode( GL_BACK, GL_LINE);
 		
 }
 
 void Application::Update()
 {
 
-	time += 0.0005;
+	time += 0.0001;
+	//if (time > 255.0f/50)
+	//{
+	//	time = 0;
+	//}
+	//std::cout << time << std::endl;
 	//Actualizar ojo
-	eye = glm::vec3(0.0f, 0.0f, 2.5f );
+	eye = glm::vec3(0.0f, 0.0f, 3.0f );
 	//Actualizar center
 	center = glm::vec3(posX/screen_width, posY / screen_height * -1, 1.0f);
 	//Actualizar camara
 	camera = glm::lookAt(eye, center, glm::vec3(0.0f, 1.0f, 0.0f));
+
 }
 
 void Application::Draw()
@@ -176,21 +199,24 @@ void Application::Draw()
 	//Seleccionar programa (shaders)
 	glUseProgram(shaders["transforms"]);
 	//Pasar el resto de los parámetros para el programa
-	glUniform1f(timeID, time);
+	glUniform1f(uniforms["time"], time);
+	glUniform1f(uniforms["frecuency"], frecuency);
+	glUniform1f(uniforms["amplitude"], amplitude);
 	glUniform1f(posxID, posX);
 	glUniform1f(posyID, posY);
-	glUniform4f(selectColorIDRed, outColorRed.x, outColorRed.y, outColorRed.z, outColorRed.w);
-	glUniform4f(selectColorIDGreen, outColorGreen.x, outColorGreen.y, outColorGreen.z, outColorGreen.w);
-	glUniform4f(selectColorIDBlue, outColorBlue.x, outColorBlue.y, outColorBlue.z, outColorBlue.w);
+	glUniform4f(uniforms["outColorRed"], outColorRed.x, outColorRed.y, outColorRed.z, outColorRed.w);
+	glUniform4f(uniforms["outColorGreen"], outColorGreen.x, outColorGreen.y, outColorGreen.z, outColorGreen.w);
+	glUniform4f(uniforms["outColorBlue"], outColorBlue.x, outColorBlue.y, outColorBlue.z, outColorBlue.w);
 	glUniformMatrix4fv(uniforms["camera"], 1, GL_FALSE, glm::value_ptr(camera));
 	glUniformMatrix4fv(uniforms["projection"], 1, GL_FALSE, glm::value_ptr(projection));
+	glUniformMatrix4fv(uniforms["accumTrans"], 1, GL_FALSE, glm::value_ptr(accumTrans));
 
 	//Seleccionar la geometria (el triangulo)
-	glBindVertexArray(geometry["triangulo"]);
+	glBindVertexArray(plane.vao);
 
 	//glDraw()
 	//glDrawArrays(GL_TRIANGLES, 0, 6);
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glDrawArrays(GL_TRIANGLES, 0, plane.getNumVertex());
 }
 
 void Application::Keyboard(int key, int scancode, int action, int mods)
