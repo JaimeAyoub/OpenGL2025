@@ -178,7 +178,8 @@ void Application::Setup()
 void Application::Update()
 {
 
-	time += 0.0001;
+	time += 0.01;
+	//frecuency = time;
 	//if (time > 255.0f/50)
 	//{
 	//	time = 0;
@@ -226,10 +227,12 @@ void Application::Keyboard(int key, int scancode, int action, int mods)
 	if (key == GLFW_KEY_A && action == GLFW_REPEAT)
 	{
 		outColorRed = glm::vec4(posX/1280, 0.0f, 0.0f, 1.0f);
+		frecuency += 1;
 	}
 	else if (key == GLFW_KEY_S && action == GLFW_REPEAT)
 	{
 		outColorGreen = glm::vec4(0.0f, posX/1280 , 0.0f, 1.0f);
+		frecuency -= 1;
 	}
 	else if (key == GLFW_KEY_D && action == GLFW_REPEAT)
 	{
