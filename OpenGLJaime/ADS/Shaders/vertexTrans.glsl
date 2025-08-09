@@ -18,17 +18,41 @@ uniform vec4 outColorGreen;
 uniform vec4 outColorBlue;
 
 
+struct Light
+{
+	vec4 ambient;
+	vec4 diffuse;
+	vec4 specular;
+	vec4 position;
+};
+struct Material
+{
+	vec4 ambient;
+	vec4 diffuse;
+	vec4 specular;
+};
+
 	float F(float x, float z,float amplitude,float phase, float frecuency)
 	{
 		return amplitude * cos(phase + frecuency * (x * x + z * z));
 	}
+
+	vec4 ambient(Light L, Material M)
+	{
+		return L.ambient * M.ambient;
+	}
+	/*vec4 diffuse(Light L, Material M, vec4 Normal)
+	{
+		return 
+	}
+	*/
+	
 
 	
 void main()
 {
 	/*vec4 newPosition = vPosition;
 	newPosition.y = height(newPosition.x, newPosition.z, time);
-	vec4 finalColor = color;
 	finalColor = outColorRed + outColorGreen + outColorBlue;
 
 	if (distance(1.0f, newPosition.x) <= time)
@@ -40,6 +64,7 @@ void main()
 	newPosition.y = 0.3f * cos(time * newPosition.x * newPosition.x ) +
 					0.3f * sin(time * newPosition.y * newPosition.y);*/
 
+	vec4 finalColor = color;
 	vec4 newPosition = vPosition;
 	if (distance(vec4(0.0f,0.0f,0.0f,1.0f), newPosition) <= time)
 	{

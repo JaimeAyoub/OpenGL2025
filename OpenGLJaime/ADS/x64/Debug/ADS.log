@@ -1,0 +1,7 @@
+﻿  ADS.cpp
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\ADS\src\ADS.cpp(22,79): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\ADS\src\ADS.cpp(22,54): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+  Application.cpp
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\ADS\src\Application.cpp(181,14): warning C4305: '+=': truncation from 'double' to 'float'
+  Generating Code...
+  ADS.vcxproj -> C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\x64\Debug\ADS.exe
