@@ -14,8 +14,10 @@ private:
 	std::map<std::string, GLuint> uniforms;
 
 	glm::mat4 projection;
-	glm::mat4 camera;
+	glm::mat4 camera;	
 	glm::mat4 accumTrans;
+	glm::mat4 accumTransX;
+	glm::mat4 accumTransY;
 	glm::vec3 eye;
 	glm::vec3 center;
 	
@@ -29,7 +31,7 @@ private:
 
 	float time{0.0f};
 	float frecuency{ 17.0f };
-	float amplitude{ 0.0f };
+	float amplitude{ 0.125f };
 	GLuint timeID;
 
 	//Cosas para el mouse

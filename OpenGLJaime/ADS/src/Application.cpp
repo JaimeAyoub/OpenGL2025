@@ -31,7 +31,8 @@ void Application::SetupShaderTransform()
 	shaders["transforms"] = InitializeProgram(vertexShader, fragmentShader);
 	uniforms["camera"] = glGetUniformLocation(shaders["transforms"], "camera");
 	uniforms["projection"] = glGetUniformLocation(shaders["transforms"], "projection");
-	uniforms["acumTrans"] = glGetUniformLocation(shaders["uniforms"], "acummTrans");
+	uniforms["accumTrans"] = glGetUniformLocation(shaders["transforms"], "accumTrans");
+	uniforms["eye"] = glGetUniformLocation(shaders["transforms"], "eye");
 	uniforms["outColorRed"] = glGetUniformLocation(shaders["transforms"], "outColorRed");
 	uniforms["outColorGreen"] = glGetUniformLocation(shaders["transforms"], "outColorGreen");
 	uniforms["outColorBlue"] = glGetUniformLocation(shaders["transforms"], "outColorBlue");
@@ -170,7 +171,7 @@ void Application::Setup()
 	accumTrans = glm::rotate(glm::mat4(1.0f), glm::radians(45.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
-	glPolygonMode( GL_FRONT, GL_LINE);
+	glPolygonMode( GL_FRONT, GL_FILL);
 	glPolygonMode( GL_BACK, GL_LINE);
 		
 }
@@ -184,11 +185,14 @@ void Application::Update()
 	//{
 	//	time = 0;
 	//}
-	//std::cout << time << std::endl;
 	//Actualizar ojo
-	eye = glm::vec3(0.0f, 0.0f, 3.0f );
+	accumTransX = glm::rotate(glm::mat4(1.0f), glm::radians(posY * 20 / screen_height), glm::vec3(1.0f, 0.0f, 0.0f));
+	accumTransY = glm::rotate(glm::mat4(1.0f), glm::radians(posX * 20/screen_width), glm::vec3(0.0f, 1.0f, 0.0f));
+	accumTrans = accumTransX * accumTransY;
+	eye = glm::vec3(0.0f, 0.0f, 5.0f);
+	//std::cout << amplitude << std::endl;
 	//Actualizar center
-	center = glm::vec3(posX/screen_width, posY / screen_height * -1, 1.0f);
+	center = glm::vec3(0, 0, 1.0f);
 	//Actualizar camara
 	camera = glm::lookAt(eye, center, glm::vec3(0.0f, 1.0f, 0.0f));
 
@@ -203,6 +207,7 @@ void Application::Draw()
 	glUniform1f(uniforms["time"], time);
 	glUniform1f(uniforms["frecuency"], frecuency);
 	glUniform1f(uniforms["amplitude"], amplitude);
+	glUniform3f(uniforms["eye"], eye.x,eye.y,eye.z);
 	glUniform1f(posxID, posX);
 	glUniform1f(posyID, posY);
 	glUniform4f(uniforms["outColorRed"], outColorRed.x, outColorRed.y, outColorRed.z, outColorRed.w);
