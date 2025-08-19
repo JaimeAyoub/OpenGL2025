@@ -151,7 +151,7 @@ void Application::SetupGeometrySingleArray()
 
 void Application::SetupPlane()
 {
-	plane.createPlane(50);
+	plane.createPlane(10);
 }
 void Application::Setup()
 {
@@ -179,7 +179,7 @@ void Application::Setup()
 void Application::Update()
 {
 
-	time += 0.01;
+	time += 0.001;
 	//frecuency = time;
 	//if (time > 255.0f/50)
 	//{
@@ -189,7 +189,7 @@ void Application::Update()
 	accumTransX = glm::rotate(glm::mat4(1.0f), glm::radians(posY * 20 / screen_height), glm::vec3(1.0f, 0.0f, 0.0f));
 	accumTransY = glm::rotate(glm::mat4(1.0f), glm::radians(posX * 20/screen_width), glm::vec3(0.0f, 1.0f, 0.0f));
 	accumTrans = accumTransX * accumTransY;
-	eye = glm::vec3(0.0f, 0.0f, 5.0f);
+	eye = glm::vec3(0.0f, 0.0f, 1.5f);
 	//std::cout << amplitude << std::endl;
 	//Actualizar center
 	center = glm::vec3(0, 0, 1.0f);

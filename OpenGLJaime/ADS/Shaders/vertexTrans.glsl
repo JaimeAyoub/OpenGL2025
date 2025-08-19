@@ -84,7 +84,7 @@ void main()
 	Light light;
 	light.ambient = vec4(1.0f, 0.01f, 1.0f, 1.0f);
 	light.diffuse = vec4(1.0f, 0.1f, 1.0f, 1.0f);
-	light.position = vec3(0.0f, 1.0f, 0.0f);
+	light.position = vec3(0.0f, 2.0f, 1.0f);
 	light.specular = vec4(0.0f,0.5f,0.0f,1.0f);
 	Material material;
 	material.ambient = vec4(0.01f, 0.01f, 1.0f, 1.0f);
@@ -116,15 +116,18 @@ void main()
 //					0.3f * sin(time * newPosition.y * newPosition.y);
 	float f = F(newPosition.x, newPosition.z, amplitude, time, frecuency);
 	newPosition.y = f;
+	vec4 colorLow = vec4(0.0f,0.0f,0.0f,1.0f);
+	vec4 colorMid = vec4(0.0f,0.0f,0.0f,1.0f);
+	vec4 colorHight = vec4(0.0f,0.0f,0.0f,1.0f);
 	
-	
-	
-//	if (f <= 0.025)
-//		finalColor = vec4(0.0, 0.0, 0.0, 1.0);
-//	else if (f <= 0.0)
-//		finalColor = vec4(0.5, 0.5, 0.5, 1.0);
-//	else if (f <= 1.0)
-//		finalColor = vec4(1.0, 1.0, 1.0, 1.0);
+	if(f <= -0.125f)
+		colorLow = vec4(0.0, 0.0, 0.0, 1.0);
+	else if (f <= 0.0)
+		 colorMid = vec4(0.5, 0.5, 0.5, 1.0);
+	else if (f <= 0.125f)
+		vec4 colorHight = vec4(1.0, 1.0, 1.0, 1.0);
+
+	finalColor = colorLow + colorMid + colorHight;
 
 
 

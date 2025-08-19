@@ -28,6 +28,7 @@ private:
 	void SetupShaderTransform();
 	void SetupGeometry();
 	void SetupGeometrySingleArray();
+	
 
 	float time{0.0f};
 	float frecuency{ 17.0f };
