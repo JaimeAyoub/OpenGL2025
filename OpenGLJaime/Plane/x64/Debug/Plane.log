@@ -1,17 +1,17 @@
 ﻿  Application.cpp
-C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGLJaime\OpenGLJaime\Plane\src\Application.cpp(181,10): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\Plane\src\Application.cpp(181,14): warning C4305: '+=': truncation from 'double' to 'float'
   HelloPlane.cpp
-C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGLJaime\OpenGLJaime\Plane\src\HelloPlane.cpp(22,79): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGLJaime\OpenGLJaime\Plane\src\HelloPlane.cpp(22,54): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\Plane\src\HelloPlane.cpp(22,79): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\Plane\src\HelloPlane.cpp(22,54): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
   Plane.cpp
-C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGLJaime\OpenGLJaime\Plane\src\Plane.cpp(34,37): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGLJaime\OpenGLJaime\Plane\src\Plane.cpp(34,53): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGLJaime\OpenGLJaime\Plane\src\Plane.cpp(42,13): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGLJaime\OpenGLJaime\Plane\src\Plane.cpp(43,7): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGLJaime\OpenGLJaime\Plane\src\Plane.cpp(120,17): warning C4101: 'VBO_colorsID': unreferenced local variable
-C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGLJaime\OpenGLJaime\Plane\src\Plane.cpp(120,9): warning C4101: 'VBO_id': unreferenced local variable
-C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGLJaime\OpenGLJaime\Plane\src\Plane.cpp(141,14): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\Plane\src\Plane.cpp(34,37): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\Plane\src\Plane.cpp(34,53): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\Plane\src\Plane.cpp(42,13): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\Plane\src\Plane.cpp(43,7): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\Plane\src\Plane.cpp(120,17): warning C4101: 'VBO_colorsID': unreferenced local variable
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\Plane\src\Plane.cpp(120,9): warning C4101: 'VBO_id': unreferenced local variable
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\Plane\src\Plane.cpp(141,14): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   ShaderFuncs.cpp
   Generating Code...
   glad.c
-  Plane.vcxproj -> C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGLJaime\OpenGLJaime\x64\Debug\Plane.exe
+  Plane.vcxproj -> C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\x64\Debug\Plane.exe
