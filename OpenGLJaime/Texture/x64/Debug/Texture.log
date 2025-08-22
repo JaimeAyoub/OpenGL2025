@@ -1,4 +1,6 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(534,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Plane.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(538,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Plane.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Application.cpp
-C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\Texture\src\Application.cpp(213,15): warning C4305: '+=': truncation from 'double' to 'float'
-  Texture.vcxproj -> C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\x64\Debug\Texture.exe
+C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGLJaime\OpenGLJaime\Texture\src\Application.cpp(216,10): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGLJaime\OpenGLJaime\Texture\src\Application.cpp(279,12): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGLJaime\OpenGLJaime\Texture\src\Application.cpp(285,12): warning C4305: '+=': truncation from 'double' to 'float'
+  Texture.vcxproj -> C:\Users\jaimi\OneDrive\Escritorio\OpenGL\OpenGL Pedro\OpenGLJaime\OpenGLJaime\x64\Debug\Texture.exe

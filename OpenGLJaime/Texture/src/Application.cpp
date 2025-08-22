@@ -43,6 +43,8 @@ void Application::SetupShaderTransform()
 	uniforms["frecuency"] = glGetUniformLocation(shaders["transforms"], "frecuency");
 	uniforms["amplitude"] = glGetUniformLocation(shaders["transforms"], "amplitude");
 	uniforms["tex0"] = glGetUniformLocation(shaders["transforms"], "tex0");
+	uniforms["tex1"] = glGetUniformLocation(shaders["transforms"], "tex1");
+	uniforms["value"] = glGetUniformLocation(shaders["transforms"], "value");
 
 }
 
@@ -190,6 +192,7 @@ void Application::Setup()
 	SetupShaders();
 	SetupPlane();
 	textures["lenna"] = SetupTexture("Textures/Lenna.png");
+	textures["kirbo"] = SetupTexture("Textures/Kirbo.jpg");
 	//SetupGeometry();
 
 	//SetupGeometrySingleArray();
@@ -236,6 +239,7 @@ void Application::Draw()
 	glUseProgram(shaders["transforms"]);
 	//Pasar el resto de los parámetros para el programa
 	glUniform1f(uniforms["time"], time);
+	glUniform1f(uniforms["value"], value);
 	glUniform1f(uniforms["frecuency"], frecuency);
 	glUniform1f(uniforms["amplitude"], amplitude);
 	glUniform3f(uniforms["eye"], eye.x, eye.y, eye.z);
@@ -252,6 +256,10 @@ void Application::Draw()
 	glBindTexture(GL_TEXTURE_2D, textures["lenna"]);
 	glUniform1i(uniforms["tex0"], 0);
 	glActiveTexture(GL_TEXTURE0);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, textures["kirbo"]);
+	glUniform1i(uniforms["tex1"], 1);
 	//Seleccionar la geometria (el triangulo)
 	glBindVertexArray(plane.vao);
 
@@ -266,13 +274,15 @@ void Application::Keyboard(int key, int scancode, int action, int mods)
 
 	if (key == GLFW_KEY_A && action == GLFW_REPEAT)
 	{
-		outColorRed = glm::vec4(posX / 1280, 0.0f, 0.0f, 1.0f);
-		frecuency += 1;
+		//outColorRed = glm::vec4(posX / 1280, 0.0f, 0.0f, 1.0f);
+		//frecuency += 1;
+		value -= 0.05;
 	}
 	else if (key == GLFW_KEY_S && action == GLFW_REPEAT)
 	{
-		outColorGreen = glm::vec4(0.0f, posX / 1280, 0.0f, 1.0f);
-		frecuency -= 1;
+		//outColorGreen = glm::vec4(0.0f, posX / 1280, 0.0f, 1.0f);
+		//frecuency -= 1;
+		value += 0.05;
 	}
 	else if (key == GLFW_KEY_D && action == GLFW_REPEAT)
 	{
@@ -303,6 +313,7 @@ void Application::Keyboard2()
 	if (glfwGetKey(this->window, GLFW_KEY_A) == GLFW_PRESS)
 	{
 		outColorRed = glm::vec4(posX / 1280, 0.0f, 0.0f, 1.0f);
+
 	}
 	else if (glfwGetKey(this->window, GLFW_KEY_S) == GLFW_PRESS)
 	{

@@ -36,6 +36,7 @@ private:
 	float frecuency{ 17.0f };
 	float amplitude{ 0.125f };
 	GLuint timeID;
+	float value;
 
 	//Cosas para el mouse
 	double posxMouse{ 0.0 };
