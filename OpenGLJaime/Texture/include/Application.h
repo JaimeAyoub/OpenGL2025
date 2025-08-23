@@ -6,6 +6,8 @@
 #include "Plane.h"
 #include <string>
 #include <map>
+#include <algorithm>
+#include <iostream>
 class Application
 {
 private:
@@ -36,7 +38,7 @@ private:
 	float frecuency{ 17.0f };
 	float amplitude{ 0.125f };
 	GLuint timeID;
-	float value;
+	float value = 0.0f;
 
 	//Cosas para el mouse
 	double posxMouse{ 0.0 };

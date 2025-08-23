@@ -194,7 +194,7 @@ void Application::Setup()
 	textures["lenna"] = SetupTexture("Textures/Lenna.png");
 	textures["kirbo"] = SetupTexture("Textures/Kirbo.jpg");
 	//SetupGeometry();
-
+	
 	//SetupGeometrySingleArray();
 
 	//Inicializar camara
@@ -224,7 +224,8 @@ void Application::Update()
 	accumTransY = glm::rotate(glm::mat4(1.0f), glm::radians(posX * 20 / screen_width), glm::vec3(0.0f, 1.0f, 0.0f));
 	accumTrans = accumTransX * accumTransY;
 	eye = glm::vec3(0.0f, 0.0f, 5.5f);
-	//std::cout << amplitude << std::endl;
+	std::cout << value << std::endl;
+	
 	//Actualizar center
 	center = glm::vec3(0, 0, 1.0f);
 	//Actualizar camara
@@ -257,9 +258,9 @@ void Application::Draw()
 	glUniform1i(uniforms["tex0"], 0);
 	glActiveTexture(GL_TEXTURE0);
 
-	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, textures["kirbo"]);
 	glUniform1i(uniforms["tex1"], 1);
+	glActiveTexture(GL_TEXTURE1);
 	//Seleccionar la geometria (el triangulo)
 	glBindVertexArray(plane.vao);
 
@@ -272,17 +273,22 @@ void Application::Keyboard(int key, int scancode, int action, int mods)
 {
 	window = this->window;
 
+	if (value < 0)
+		value = 0;
+	else if (value > 1)
+		value = 1;
 	if (key == GLFW_KEY_A && action == GLFW_REPEAT)
 	{
 		//outColorRed = glm::vec4(posX / 1280, 0.0f, 0.0f, 1.0f);
 		//frecuency += 1;
-		value -= 0.05;
+		
 	}
 	else if (key == GLFW_KEY_S && action == GLFW_REPEAT)
 	{
 		//outColorGreen = glm::vec4(0.0f, posX / 1280, 0.0f, 1.0f);
 		//frecuency -= 1;
-		value += 0.05;
+		
+		
 	}
 	else if (key == GLFW_KEY_D && action == GLFW_REPEAT)
 	{
@@ -291,6 +297,14 @@ void Application::Keyboard(int key, int scancode, int action, int mods)
 	else if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, 1);
+	}
+	else if (key == GLFW_KEY_RIGHT && action == GLFW_REPEAT)
+	{
+		value -= 0.05;
+	}
+	else if (key == GLFW_KEY_LEFT && action == GLFW_REPEAT)
+	{
+		value += 0.05;
 	}
 
 }

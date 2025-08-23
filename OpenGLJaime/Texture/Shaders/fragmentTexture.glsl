@@ -11,6 +11,6 @@ void main()
 {
     vec4 textureLenna = texture(tex0, texCoord);
     vec4 textureKirbo = texture(tex1,texCoord);
-    vec4 texelColor = mix(textureLenna,textureKirbo,clamp(value,0.0f,1.0f));
+    vec4 texelColor = mix(textureLenna,textureKirbo,value);
     fragColor = texelColor;
 }

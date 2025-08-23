@@ -116,18 +116,21 @@ void main()
 //					0.3f * sin(time * newPosition.y * newPosition.y);
 	float f = F(newPosition.x, newPosition.z, amplitude, time, frecuency);
 	newPosition.y = f;
-	vec4 colorLow = vec4(0.0f,0.0f,0.0f,1.0f);
-	vec4 colorMid = vec4(0.0f,0.0f,0.0f,1.0f);
-	vec4 colorHight = vec4(0.0f,0.0f,0.0f,1.0f);
-	
-	if(f <= -0.125f)
-		colorLow = vec4(0.0, 0.0, 0.0, 1.0);
-	else if (f <= 0.0)
-		 colorMid = vec4(0.5, 0.5, 0.5, 1.0);
-	else if (f <= 0.125f)
-		vec4 colorHight = vec4(1.0, 1.0, 1.0, 1.0);
 
-	finalColor = colorLow + colorMid + colorHight;
+	vec4 colorLow = vec4(0.0f,0.0f,0.0f,1.0f);
+	vec4 colorMid = vec4(0.5f,0.5f,0.5f,1.0f);
+	vec4 colorHight = vec4(1.0f,1.0f,1.0f,1.0f);
+	
+	if (f <= -0.125f)
+		finalColor = mix(colorLow, colorMid, ((f - 0.125f)/f+f));
+	else if (f <= 0.0)
+		finalColor = mix(colorMid, colorHight,((f) / f + f));
+	else if (f <= 0.125f)
+		finalColor = colorHight;
+	else
+		finalColor = colorHight;
+
+
 
 
 

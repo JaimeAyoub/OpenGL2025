@@ -27,8 +27,8 @@ void main()
 
 	vec4 newPosition = vPosition;
 
-	float f = F(newPosition.x, newPosition.z, amplitude, time, frecuency);
-	newPosition.y = f;
+	/*float f = F(newPosition.x, newPosition.z, amplitude, time, frecuency);
+	newPosition.y = f;*/
 	//color = vec4(clamp(0.7 * F(newPosition.x, newPosition.x, amplitude, time, frecuency), 0.0f, 1.0f), 0.3f, 0.3f, 1.0f);
 	
 	texCoord = vTextCoord;
