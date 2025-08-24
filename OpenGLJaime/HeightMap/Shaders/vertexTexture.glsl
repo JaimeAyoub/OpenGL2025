@@ -6,6 +6,7 @@ layout(location = 1) in vec2 vTextCoord;
 
 out vec2 texCoord;
 uniform float time;
+out vec4 test;
 
 uniform mat4 camera;
 uniform mat4 projection;
@@ -30,15 +31,16 @@ void main()
 
 
 	vec4 newPosition = vPosition;
-	vec4 HeightMap = texture(tex0,texCoord);
-	float L = ((HeightMap.r * 0.2126f) + (HeightMap.g * 0.7152) + (HeightMap.b * 0.0722f));
-	//float L = (0.299 * pow(HeightMap.r,2) + 0.587 * pow(HeightMap.r, 2) + 0.114 * pow(HeightMap.r,2));
-	newPosition.y = L*50;
+	
 
 	//float f = F(newPosition.x, newPosition.z, amplitude, time, frecuency);
 	//newPosition.y = f;
 	//color = vec4(clamp(0.7 * F(newPosition.x, newPosition.x, amplitude, time, frecuency), 0.0f, 1.0f), 0.3f, 0.3f, 1.0f);
-	
 	texCoord = vTextCoord;
+	vec4 HeightMap = texture(tex0,texCoord);
+	//test = HeightMap;
+	//float L = ((HeightMap.r * 0.2126f) + (HeightMap.g * 0.7152) + (HeightMap.b * 0.0722f));
+	float L = (0.299 * pow(HeightMap.r,2) + 0.587 * pow(HeightMap.r, 2) + 0.114 * pow(HeightMap.r,2));
+	newPosition.y = L*100;
 	gl_Position = projection * camera *  accumTrans * newPosition;  //equivale a hacer return gl_Position
 }
