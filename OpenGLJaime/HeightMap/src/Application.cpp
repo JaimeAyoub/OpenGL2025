@@ -158,7 +158,7 @@ void Application::SetupGeometrySingleArray()
 void Application::SetupPlane()
 {
 	
-		plane.createPlane(100);
+		plane.createPlane(200);
 
 		glGenVertexArrays(1, &plane.vao);
 		glBindVertexArray(plane.vao);
@@ -210,8 +210,8 @@ void Application::Setup()
 
 	SetupShaders();
 	SetupPlane();
-	textures["lenna"] = SetupTexture("Textures/HeightMap.png");
-	textures["kirbo"] = SetupTexture("Textures/Diffuse.png");
+	textures["HeightMap"] = SetupTexture("Textures/HeightMap.png");
+	textures["Diffuse"] = SetupTexture("Textures/Diffuse.png");
 	//SetupGeometry();
 	
 	//SetupGeometrySingleArray();
@@ -220,7 +220,7 @@ void Application::Setup()
 	eye = glm::vec3(0.0f, 0.0f, 5.0f);
 
 	center = glm::vec3(0.0f, 0.0f, -1.0f);
-	projection = glm::perspective(glm::radians(45.0f), (1280.0f / 960.0f), 0.1f, 200.0f);
+	projection = glm::perspective(glm::radians(45.0f), (1280.0f / 960.0f), 0.1f, 500.0f);
 	accumTrans = glm::rotate(glm::mat4(1.0f), glm::radians(45.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
@@ -242,7 +242,7 @@ void Application::Update()
 	accumTransX = glm::rotate(glm::mat4(1.0f), glm::radians(posY * 20 / screen_height), glm::vec3(1.0f, 0.0f, 0.0f));
 	accumTransY = glm::rotate(glm::mat4(1.0f), glm::radians(posX * 20 / screen_width), glm::vec3(0.0f, 1.0f, 0.0f));
 	accumTrans = accumTransX * accumTransY;
-	eye = glm::vec3(0.0f, 0.0f, 150.5f);
+	eye = glm::vec3(0.0f, 100.0f, 150.5f);
 	//std::cout << value << std::endl;
 	
 	//Actualizar center
@@ -273,12 +273,12 @@ void Application::Draw()
 	glUniformMatrix4fv(uniforms["accumTrans"], 1, GL_FALSE, glm::value_ptr(accumTrans));
 
 	//Seleccionar las texturas
-	glBindTexture(GL_TEXTURE_2D, textures["lenna"]);
+	glBindTexture(GL_TEXTURE_2D, textures["HeightMap"]);
 	glUniform1i(uniforms["tex0"], 0);
 	glActiveTexture(GL_TEXTURE0);
 
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, textures["kirbo"]);
+	glBindTexture(GL_TEXTURE_2D, textures["Diffuse"]);
 	glUniform1i(uniforms["tex1"], 1);
 	//Seleccionar la geometria (el triangulo)
 	glBindVertexArray(plane.vao);

@@ -41,6 +41,6 @@ void main()
 	//test = HeightMap;
 	//float L = ((HeightMap.r * 0.2126f) + (HeightMap.g * 0.7152) + (HeightMap.b * 0.0722f));
 	float L = (0.299 * pow(HeightMap.r,2) + 0.587 * pow(HeightMap.r, 2) + 0.114 * pow(HeightMap.r,2));
-	newPosition.y = L*100;
+	newPosition.y = L*150;
 	gl_Position = projection * camera *  accumTrans * newPosition;  //equivale a hacer return gl_Position
 }

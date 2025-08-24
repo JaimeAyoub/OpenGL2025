@@ -11,7 +11,7 @@ uniform float value;
 void main()
 {
   
-    vec4 textureKirbo = texture(tex1,texCoord);
+    vec4 finalTexture = texture(tex1,texCoord);
    
-    fragColor = textureKirbo;
+    fragColor = finalTexture;
 }
