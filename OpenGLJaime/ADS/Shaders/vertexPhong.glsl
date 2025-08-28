@@ -82,6 +82,7 @@ void main()
 
 
 	normal = NormalCalculate(newPosition.x,newPosition.z,amplitude,time,frecuency);
+
 	mat4 matForNormals = transpose(inverse(camera*accumTrans)); //Matriz solo para las normales
 	normal = normalize(matForNormals * vec4(normal,1.0)).xyz;
 	newPosition = camera *  accumTrans * newPosition;

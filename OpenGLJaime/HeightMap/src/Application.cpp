@@ -242,7 +242,7 @@ void Application::Update()
 	accumTransX = glm::rotate(glm::mat4(1.0f), glm::radians(posY * 20 / screen_height), glm::vec3(1.0f, 0.0f, 0.0f));
 	accumTransY = glm::rotate(glm::mat4(1.0f), glm::radians(posX * 20 / screen_width), glm::vec3(0.0f, 1.0f, 0.0f));
 	accumTrans = accumTransX * accumTransY;
-	eye = glm::vec3(0.0f, 100.0f, 150.5f);
+	eye = glm::vec3(0.0f, 0.0f, 3.0f);
 	//std::cout << value << std::endl;
 	
 	//Actualizar center

@@ -1,3 +1,17 @@
-﻿  Application.cpp
-C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\ADS\src\Application.cpp(182,15): warning C4305: '+=': truncation from 'double' to 'float'
+﻿  ADS.cpp
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\ADS\src\ADS.cpp(22,79): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\ADS\src\ADS.cpp(22,54): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+  Application.cpp
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\ADS\src\Application.cpp(182,10): warning C4305: '+=': truncation from 'double' to 'float'
+  Plane.cpp
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\ADS\src\Plane.cpp(34,37): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\ADS\src\Plane.cpp(34,53): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\ADS\src\Plane.cpp(42,13): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\ADS\src\Plane.cpp(43,7): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\ADS\src\Plane.cpp(120,17): warning C4101: 'VBO_colorsID': unreferenced local variable
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\ADS\src\Plane.cpp(120,9): warning C4101: 'VBO_id': unreferenced local variable
+C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\ADS\src\Plane.cpp(141,14): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  ShaderFuncs.cpp
+  Generating Code...
+  glad.c
   ADS.vcxproj -> C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\x64\Debug\ADS.exe
