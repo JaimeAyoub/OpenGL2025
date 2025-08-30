@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HeightMap", "HeightMap\Heig
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BumpMapping", "BumpMapping\BumpMapping.vcxproj", "{72D1F787-6E30-4264-9B98-F92731E75003}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FPS", "FPS\FPS.vcxproj", "{CBAE7237-197B-42DA-9C92-8D9425B15F09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -91,6 +93,14 @@ Global
 		{72D1F787-6E30-4264-9B98-F92731E75003}.Release|x64.Build.0 = Release|x64
 		{72D1F787-6E30-4264-9B98-F92731E75003}.Release|x86.ActiveCfg = Release|Win32
 		{72D1F787-6E30-4264-9B98-F92731E75003}.Release|x86.Build.0 = Release|Win32
+		{CBAE7237-197B-42DA-9C92-8D9425B15F09}.Debug|x64.ActiveCfg = Debug|x64
+		{CBAE7237-197B-42DA-9C92-8D9425B15F09}.Debug|x64.Build.0 = Debug|x64
+		{CBAE7237-197B-42DA-9C92-8D9425B15F09}.Debug|x86.ActiveCfg = Debug|Win32
+		{CBAE7237-197B-42DA-9C92-8D9425B15F09}.Debug|x86.Build.0 = Debug|Win32
+		{CBAE7237-197B-42DA-9C92-8D9425B15F09}.Release|x64.ActiveCfg = Release|x64
+		{CBAE7237-197B-42DA-9C92-8D9425B15F09}.Release|x64.Build.0 = Release|x64
+		{CBAE7237-197B-42DA-9C92-8D9425B15F09}.Release|x86.ActiveCfg = Release|Win32
+		{CBAE7237-197B-42DA-9C92-8D9425B15F09}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
