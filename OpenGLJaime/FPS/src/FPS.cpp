@@ -47,6 +47,7 @@ int main(void)
         
         /* Poll for and process events */
         glfwPollEvents();
+
         application.Update();
         application.Keyboard2();
         application.MousePosition();

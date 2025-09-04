@@ -156,6 +156,51 @@ void Application::SetupGeometrySingleArray()
 	glEnableVertexAttribArray(1);
 }
 
+void Application::CameraFPS()
+{
+	if (posX > screen_width)
+	{
+		posX = screen_width;
+		glfwSetCursorPos(window, posX, posY);
+	}
+	else if (posX < 0)
+	{
+		posX = 0;
+		glfwSetCursorPos(window, posX, posY);
+	}
+	if (posY > screen_height)
+	{
+		posY = screen_height;
+		glfwSetCursorPos(window, posX, posY);
+	 }
+	else if (posY < 0)
+	{
+		posY = 0;
+		glfwSetCursorPos(window, posX, posY);
+	}
+	horizontalAngle = 180.0f + (float(screen_width / 2 + posX)) ;
+	verticalAngle =   180.0f + (float(screen_height / 2 - posY ));
+
+
+
+	direction = glm::vec3(cos(glm::radians(verticalAngle)) * sin(glm::radians(horizontalAngle)),
+		sin(glm::radians(verticalAngle)),
+		cos(glm::radians(verticalAngle) * cos(glm::radians(horizontalAngle))));
+
+	right = glm::vec3(
+		sin(glm::radians(horizontalAngle) - 3.14f / 2.0f),
+		0,
+		cos(glm::radians(horizontalAngle) - 3.14f / 2.0f)
+	);
+	std::cout << horizontalAngle <<" "<< verticalAngle << std::endl;
+
+
+	 up = glm::cross(right, direction);
+	 camera = glm::lookAt(eye, eye + direction, glm::vec3(0,1,0));
+
+
+}
+
 void Application::SetupPlane()
 {
 	
@@ -218,7 +263,7 @@ void Application::Setup()
 	//SetupGeometrySingleArray();
 
 	//Inicializar camara
-	eye = glm::vec3(0.0f, 0.0f, 2.0f);
+	eye = glm::vec3(0.0f, 0.0f, 5.0f);
 
 	center = glm::vec3(0.0f, 0.0f, 0.0f);
 	projection = glm::perspective(glm::radians(45.0f), (1280.0f / 960.0f), 0.1f, 500.0f);
@@ -233,29 +278,13 @@ void Application::Setup()
 void Application::Update()
 {
 
-	time += 0.001;
-	//frecuency = time;
-	//if (time > 255.0f/50)
-	//{
-	//	time = 0;
-	//}
 	//Actualizar center
-	center = glm::vec3(0.0, 0.0f, -1.0f);
+	//center = glm::vec3(0.0, 0.0f, -1.0f);
 	//Actualizar ojo
-	eye = glm::vec3(cameraPos.x, 0.0f, cameraPos.y);
-	//Rotacion mouse
-	rotationCenterX = glm::rotate(glm::mat4(1.0f), glm::radians(posY * -20.0f / screen_height), glm::vec3(1.0f, 0.0f, 0.0f));
-	rotationCenterY = glm::rotate(glm::mat4(1.0f), glm::radians(posX * -20.0f / screen_width), glm::vec3(0.0f, 1.0f, 0.0f));
-	rotationTotalCenter = rotationCenterX * rotationCenterY;
+	CameraFPS();
 	
-	glm::vec4 rotateCenter = rotationTotalCenter * glm::vec4(center,1.0f);
-	glm::vec3 rotatedCenter = glm::vec3(rotateCenter);
-
-
-	std::cout << rotatedCenter.y << std::endl;
 	
-	//Actualizar camara
-	camera = glm::lookAt(eye, rotatedCenter + eye , glm::vec3(0.0f, 1.0f, 0.0f));
+	
 
 }
 
@@ -303,26 +332,26 @@ void Application::Keyboard(int key, int scancode, int action, int mods)
 
 	if (key == GLFW_KEY_A && action == GLFW_REPEAT)
 	{
-		cameraPos.x -= 0.5f;
+		eye -= right * speed;
 		
 	}
 	else if (key == GLFW_KEY_S && action == GLFW_REPEAT)
 	{
-		cameraPos.y += 0.5f;
+		eye -= direction * speed;
 	}
 	else if (key == GLFW_KEY_W && action == GLFW_REPEAT)
 	{
-		cameraPos.y -= 0.5f;
+		eye += direction * speed;
 	}
 	else if (key == GLFW_KEY_D && action == GLFW_REPEAT)
 	{
-		cameraPos.x += 0.5f;
+		eye += right * speed;
 	}
 	else if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, 1);
 	}
-
+	
 
 }
 
@@ -343,20 +372,20 @@ void Application::Keyboard2()
 
 	if (glfwGetKey(this->window, GLFW_KEY_W) == GLFW_PRESS)
 	{
-		cameraPos.y -= 0.01f;
+		eye += direction * speed;
 
 	}
 	else if (glfwGetKey(this->window, GLFW_KEY_A) == GLFW_PRESS)
 	{
-		cameraPos.x -= 0.01f;
+		eye -= right * speed;;
 	}
 	else if (glfwGetKey(this->window, GLFW_KEY_S) == GLFW_PRESS)
 	{
-		cameraPos.y += 0.01f;
+		eye -= direction * speed;;
 	}
 	else if (glfwGetKey(this->window, GLFW_KEY_D) == GLFW_PRESS)
 	{
-		cameraPos.x += 0.01f;
+		eye += right * speed;;
 	}
 
 	if (glfwGetKey(this->window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -371,4 +400,5 @@ void Application::MousePosition()
 	glfwGetCursorPos(this->window, &posxMouse, &posyMouse);
 	posX = static_cast<float>(posxMouse);
 	posY = static_cast<float>(posyMouse);
+
 }

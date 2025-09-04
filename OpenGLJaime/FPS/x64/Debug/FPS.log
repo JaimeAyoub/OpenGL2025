@@ -1,4 +1,3 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(538,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (BumpMapping.vcxproj, HeightMap.vcxproj, Plane.vcxproj, Texture.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Application.cpp
-C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\FPS\src\Application.cpp(236,10): warning C4305: '+=': truncation from 'double' to 'float'
   FPS.vcxproj -> C:\Users\ALUMNOS\Desktop\OpenGL\OpenGLJaime\OpenGLJaime\x64\Debug\FPS.exe

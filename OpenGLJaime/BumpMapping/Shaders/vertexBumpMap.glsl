@@ -39,7 +39,7 @@ void main()
 
 	light.ambient = vec4(0.3f, 0.3f, 0.3f, 0.3f);
 	light.diffuse = vec4(0.3f, 0.3f, 0.3f, 0.3f);
-	light.position = vec3(0.0f, 3.0f, 1.0f);
+	light.position = vec3(0.0f, 3.0f, 0.0f);
 	light.specular = vec4(0.3f, 0.3f, 0.3f, 0.3f);
 
 

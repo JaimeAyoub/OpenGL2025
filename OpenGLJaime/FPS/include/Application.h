@@ -24,10 +24,12 @@ private:
 	glm::vec3 eye;
 	glm::vec3 center;
 	glm::vec2 cameraPos;
-	glm::mat4 rotationCenterX;
-	glm::mat4 rotationCenterY;
-	glm::mat4 rotationTotalCenter;
 
+	glm::vec3 direction;
+	glm::vec3 right;
+	glm::vec3 up = glm::vec3(0.0f,-1.0f,0.0f);
+	float horizontalAngle = 3.14f;
+	float verticalAngle = 0.0f;
 
 
 	void SetupShaders();
@@ -35,6 +37,7 @@ private:
 	void SetupShaderTransform();
 	void SetupGeometry();
 	void SetupGeometrySingleArray();
+	void CameraFPS();
 	GLuint SetupTexture(const std::string& filename);
 
 
@@ -51,6 +54,9 @@ private:
 
 	float posX{ 0.0f };
 	float posY{ 0.0f };
+	float mouseSpeed = 0.0005f;
+
+	float speed = 0.005f;
 	GLuint posxID;
 	GLuint posyID;
 	//Valores para cambiar los colores
