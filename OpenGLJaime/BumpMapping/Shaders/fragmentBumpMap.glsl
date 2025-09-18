@@ -60,8 +60,8 @@ void main()
 
 	nPos = camer * accTrans * newPosition;
 
-	vec4 HeightMap = texture(tex0, texCoord);
-	vec3 normal = normalize(HeightMap.xyz);
+	vec4 normalMap = texture(tex0, texCoord);
+	vec3 normal = normalize(normalMap.xyz);
 
 	mat4 matForNormals = transpose(inverse(camer * accTrans)); //Matriz solo para las normales
 
